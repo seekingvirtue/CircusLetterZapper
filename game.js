@@ -203,6 +203,15 @@ class CircusLetterZapper {
         // Resume audio context if needed
         this.resumeAudio();
         
+        // Start background music automatically when game starts
+        if (!this.musicPlaying) {
+            this.startBackgroundMusic();
+            // Update the music toggle button to reflect playing state
+            const musicToggle = document.getElementById('musicToggle');
+            musicToggle.textContent = '⏸️';
+            musicToggle.classList.add('playing');
+        }
+        
         document.getElementById('startButton').disabled = true;
         document.getElementById('pauseButton').disabled = false;
         document.getElementById('gameOverScreen').classList.add('hidden');
