@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circus Letter Zapper - Educational Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>🎪 Circus Letter Zapper 🎪</h1>
+            <div class="game-stats">
+                <div class="stat">Combo: <span id="combo">0</span></div>
+                <div class="stat">Accuracy: <span id="accuracy">100</span>%</div>
+                <div class="stat">Words: <span id="wordsCompleted">0</span></div>
+            </div>
+        </div>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            <div class="target-word-area">
+                <div class="target-word-label">Spell this word:</div>
+                <div class="target-word" id="targetWord">CAT</div>
+                <div class="spelled-word" id="spelledWord"></div>
+            </div>
+            <div class="game-info-overlay">
+                <div class="info-item">Score: <span id="score">0</span></div>
+                <div class="info-item">Level: <span id="level">1</span></div>
+                <div class="info-item">Lives: <span id="lives">3</span></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="startButton">Start Game</button>
+            <button id="pauseButton" disabled>Pause</button>
+            <button id="resetButton">Reset</button>
+        </div>
+        
+        <div class="audio-controls">
+            <h4>🎵 Audio Settings</h4>
+            <div class="audio-row">
+                <div class="audio-control">
+                    <label for="volumeSlider">🔊 Sound Effects:</label>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="30" step="5">
+                    <span id="volumeDisplay">30%</span>
+                </div>
+                <div class="audio-control">
+                    <label for="musicSlider">� Background Music:</label>
+                    <input type="range" id="musicSlider" min="0" max="100" value="15" step="5">
+                    <span id="musicDisplay">15%</span>
+                    <button id="musicToggle" class="mini-button">▶️</button>
+                </div>
+                <div class="audio-control">
+                    <label for="speechSlider">🗣️ Word Speech:</label>
+                    <input type="range" id="speechSlider" min="0" max="100" value="80" step="10">
+                    <span id="speechDisplay">80%</span>
+                    <button id="speechToggle" class="mini-button">🔊</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>How to Play:</h3>
+            <p>• Use your mouse to aim the clown's cannon</p>
+            <p>• Click to shoot balls at the correct letters</p>
+            <p>• Spell the target word by hitting letters in order</p>
+            <p>• Avoid hitting wrong letters or you'll lose points!</p>
+            <p>• Adjust volume, music, and speech using the sliders above</p>
+            <p>• Toggle circus music and word pronunciation on/off</p>
+            <p>• Listen as completed words are spoken aloud!</p>
+        </div>
+        
+        <div id="gameOverScreen" class="game-over hidden">
+            <h2>Game Over!</h2>
+            <div class="final-stats">
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <p>Max Combo: <span id="maxCombo">0</span></p>
+                <p>Words Completed: <span id="finalWordsCompleted">0</span></p>
+                <p>Final Accuracy: <span id="finalAccuracy">100</span>%</p>
+                <p>Level Reached: <span id="finalLevel">1</span></p>
+            </div>
+            <button id="playAgainButton">Play Again</button>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
