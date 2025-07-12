@@ -4,7 +4,7 @@ A fun and educational HTML5 circus-themed word spelling game inspired by Atari's
 
 ![Circus Letter Zapper](https://img.shields.io/badge/Game-HTML5-orange) ![JavaScript](https://img.shields.io/badge/Language-JavaScript-yellow) ![Canvas](https://img.shields.io/badge/Graphics-Canvas-red) ![Educational](https://img.shields.io/badge/Type-Educational-green)
 
-![image](https://github.com/user-attachments/assets/9107a8aa-2991-4be0-84e8-50371f0e6354)
+![DEMO](https://github.com/user-attachments/assets/6bcc4500-b6b5-4d31-983b-33054973a33a)
 
 ## 🎮 Game Features
 
