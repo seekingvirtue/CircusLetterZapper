@@ -7,6 +7,29 @@ class CircusLetterZapper {
         this.gameRunning = false;
         this.gamePaused = false;
         
+        // Language settings
+        this.currentLanguage = 'en';
+        this.translations = {
+            en: {
+                spellThisWord: 'Spell this word:',
+                score: 'Score',
+                level: 'Level',
+                lives: 'Lives',
+                combo: 'Combo',
+                accuracy: 'Accuracy',
+                words: 'Words'
+            },
+            fr: {
+                spellThisWord: 'Épelle ce mot:',
+                score: 'Score',
+                level: 'Niveau',
+                lives: 'Vies',
+                combo: 'Combo',
+                accuracy: 'Précision',
+                words: 'Mots'
+            }
+        };
+        
         // Game state
         this.score = 0;
         this.level = 1;
@@ -36,36 +59,59 @@ class CircusLetterZapper {
         this.initAudio();
         this.initSpeech();
         
-        // Word lists for different levels - 25 words each
-        this.wordLists = [
-            // Level 1: 3-letter words
-            ['CAT', 'DOG', 'SUN', 'CAR', 'BAT', 'HAT', 'FUN', 'RUN', 'BOX', 'FOX', 
-             'BED', 'RED', 'PEN', 'TEN', 'CUP', 'POP', 'TOP', 'HOP', 'BUG', 'HUG', 
-             'LOG', 'HOG', 'BAG', 'TAG', 'WIN'],
-            
-            // Level 2: 4-letter words
-            ['BIRD', 'FISH', 'CAKE', 'BOOK', 'TREE', 'MOON', 'STAR', 'PLAY', 'JUMP', 'FROG',
-             'DUCK', 'BEAR', 'LION', 'BALL', 'DOOR', 'FIRE', 'RAIN', 'SNOW', 'BLUE', 'PINK',
-             'GOLD', 'LAMP', 'SHIP', 'KITE', 'CORN'],
-            
-            // Level 3: 5-letter words
-            ['APPLE', 'HOUSE', 'WATER', 'HAPPY', 'MAGIC', 'DREAM', 'QUEEN', 'TRAIN', 'SNAKE', 'HORSE',
-             'PLANE', 'ROBOT', 'BEACH', 'BREAD', 'CHAIR', 'CLOCK', 'CLOUD', 'CROWN', 'DANCE', 'FAIRY',
-             'LIGHT', 'MUSIC', 'OCEAN', 'PLANT', 'SMILE'],
-            
-            // Level 4: 6+ letter circus-themed and advanced words
-            ['ELEPHANT', 'RAINBOW', 'BALLOON', 'JUGGLER', 'ACROBAT', 'CIRCUS', 'CLOWN', 'TRAPEZE', 'POPCORN', 'TICKET',
-             'ANIMAL', 'CAMERA', 'CASTLE', 'DRAGON', 'FLOWER', 'GARDEN', 'HAMMER', 'INSECT', 'JUNGLE', 'KITTEN',
-             'LADDER', 'MONKEY', 'NUGGET', 'OCTOPUS', 'PUZZLE']
-        ];
+        // Word lists for different levels and languages
+        this.wordLists = {
+            en: [
+                // Level 1: 3-letter words
+                ['CAT', 'DOG', 'SUN', 'CAR', 'BAT', 'HAT', 'FUN', 'RUN', 'BOX', 'FOX', 
+                 'BED', 'RED', 'PEN', 'TEN', 'CUP', 'POP', 'TOP', 'HOP', 'BUG', 'HUG', 
+                 'LOG', 'HOG', 'BAG', 'TAG', 'WIN'],
+                
+                // Level 2: 4-letter words
+                ['BIRD', 'FISH', 'CAKE', 'BOOK', 'TREE', 'MOON', 'STAR', 'PLAY', 'JUMP', 'FROG',
+                 'DUCK', 'BEAR', 'LION', 'BALL', 'DOOR', 'FIRE', 'RAIN', 'SNOW', 'BLUE', 'PINK',
+                 'GOLD', 'LAMP', 'SHIP', 'KITE', 'CORN'],
+                
+                // Level 3: 5-letter words
+                ['APPLE', 'HOUSE', 'WATER', 'HAPPY', 'MAGIC', 'DREAM', 'QUEEN', 'TRAIN', 'SNAKE', 'HORSE',
+                 'PLANE', 'ROBOT', 'BEACH', 'BREAD', 'CHAIR', 'CLOCK', 'CLOUD', 'CROWN', 'DANCE', 'FAIRY',
+                 'LIGHT', 'MUSIC', 'OCEAN', 'PLANT', 'SMILE'],
+                
+                // Level 4: 6+ letter circus-themed and advanced words
+                ['ELEPHANT', 'RAINBOW', 'BALLOON', 'JUGGLER', 'ACROBAT', 'CIRCUS', 'CLOWN', 'TRAPEZE', 'POPCORN', 'TICKET',
+                 'ANIMAL', 'CAMERA', 'CASTLE', 'DRAGON', 'FLOWER', 'GARDEN', 'HAMMER', 'INSECT', 'JUNGLE', 'KITTEN',
+                 'LADDER', 'MONKEY', 'NUGGET', 'OCTOPUS', 'PUZZLE']
+            ],
+            fr: [
+                // Level 1: 3-letter words
+                ['CAS', 'JEU', 'VUE', 'THE', 'BAL', 'SOL', 'ROI', 'BON', 'VIN', 'SAC',
+                 'BUS', 'MUR', 'NEZ', 'OUI', 'NON', 'PIE', 'RUE', 'VIE', 'FEU', 'DOS',
+                 'CAR', 'BEC', 'MOT', 'NID', 'TOI'],
+                
+                // Level 2: 4-letter words
+                ['CHAT', 'JOIE', 'PAIN', 'BEAU', 'LUNE', 'ROSE', 'NUIT', 'PEUR', 'FOUR', 'VENT',
+                 'MAIN', 'PAPA', 'DOUX', 'PARC', 'JOUR', 'BLEU', 'NOIR', 'VERT', 'MERE', 'FILS',
+                 'BOIS', 'LAIT', 'PIED', 'DAME', 'VITE'],
+                
+                // Level 3: 5-letter words
+                ['ECOLE', 'ETOILE', 'PLAGE', 'LIVRE', 'REVER', 'FLEUR', 'HEURE', 'NEIGE', 'MERCI', 'COEUR',
+                 'TABLE', 'ROUTE', 'POMME', 'ARBRE', 'CHIEN', 'MONDE', 'BELLE', 'HERBE', 'JAUNE', 'ROUGE',
+                 'VERRE', 'PORTE', 'FROID', 'CHAUD', 'SUCRE'],
+                
+                // Level 4: 6+ letter circus-themed and advanced words
+                ['CIRQUE', 'JONGLEUR', 'ACROBATE', 'CLOWN', 'TRAPEZE', 'BALLON', 'CHAPITEAU', 'SPECTACLE', 'MUSIQUE', 'LUMIERE',
+                 'ELEPHANT', 'CASCADE', 'COSTUME', 'ARTISTE', 'DANSEUR', 'MAGICIEN', 'EQUILIBRE', 'FUNAMBULE', 'APPLAUDIR', 'FESTIVAL',
+                 'PAPILLON', 'JARDIN', 'MAISON', 'SOLEIL', 'ENFANT']
+            ]
+        };
         
         this.currentWordIndex = 0;
         this.currentTargetWord = '';
         this.spelledWord = '';
         this.nextLetterIndex = 0;
         
-        // Create copies of word lists to track used words
-        this.availableWordLists = this.wordLists.map(wordList => [...wordList]);
+        // Create copies of word lists to track used words for the current language
+        this.availableWordLists = this.wordLists[this.currentLanguage].map(wordList => [...wordList]);
         
         // Game objects
         this.clown = {
@@ -125,6 +171,12 @@ class CircusLetterZapper {
             this.toggleBackgroundMusic();
         });
         
+        // Language control
+        const languageSelect = document.getElementById('languageSelect');
+        languageSelect.addEventListener('change', (e) => {
+            this.setLanguage(e.target.value);
+        });
+
         // Speech control
         const speechSlider = document.getElementById('speechSlider');
         const speechDisplay = document.getElementById('speechDisplay');
@@ -171,7 +223,7 @@ class CircusLetterZapper {
         
         // If no words left in current level, refill from original list
         if (currentWordList.length === 0) {
-            currentWordList = [...this.wordLists[levelIndex]];
+            currentWordList = [...this.wordLists[this.currentLanguage][levelIndex]];
             this.availableWordLists[levelIndex] = currentWordList;
             console.log(`Refilled word list for level ${this.level}`);
         }
@@ -247,16 +299,19 @@ class CircusLetterZapper {
         this.particles = [];
         this.floatingTexts = [];
         
-        // Reset available word lists
-        this.availableWordLists = this.wordLists.map(wordList => [...wordList]);
+        // Reset available word lists - using the current language
+        this.availableWordLists = this.wordLists[this.currentLanguage].map(wordList => [...wordList]);
         
         this.selectNewWord();
         this.updateUI();
         
+        // Hide game over screen
+        document.getElementById('gameOverScreen').classList.add('hidden');
+        
+        // Reset button states
         document.getElementById('startButton').disabled = false;
         document.getElementById('pauseButton').disabled = true;
         document.getElementById('pauseButton').textContent = 'Pause';
-        document.getElementById('gameOverScreen').classList.add('hidden');
     }
     
     handleMouseMove(e) {
@@ -609,14 +664,34 @@ class CircusLetterZapper {
         // Play game over sound
         this.playSound('gameOver', 330, 1.5, 0.4);
         
+        // Update final stats
         document.getElementById('finalScore').textContent = this.score;
         document.getElementById('maxCombo').textContent = this.maxCombo;
         document.getElementById('finalWordsCompleted').textContent = this.wordsCompleted;
         document.getElementById('finalAccuracy').textContent = this.accuracy;
         document.getElementById('finalLevel').textContent = this.level;
+        
+        // Show game over screen
         document.getElementById('gameOverScreen').classList.remove('hidden');
+        
+        // Update button states
         document.getElementById('startButton').disabled = false;
         document.getElementById('pauseButton').disabled = true;
+        
+        // Set up Play Again button
+        const playAgainButton = document.getElementById('playAgainButton');
+        const newPlayAgainButton = playAgainButton.cloneNode(true);
+        
+        // Add click handler to new button
+        newPlayAgainButton.addEventListener('click', () => {
+            // First reset the game
+            this.resetGame();
+            // Then start it immediately
+            this.startGame();
+        });
+        
+        // Replace old button with new one
+        playAgainButton.parentNode.replaceChild(newPlayAgainButton, playAgainButton);
     }
     
     updateUI() {
@@ -1182,28 +1257,67 @@ class CircusLetterZapper {
     }
     
     initSpeech() {
-        // Initialize Text-to-Speech
-        this.speechSynthesis = window.speechSynthesis;
-        this.speechVoice = null;
-        
-        // Wait for voices to load and select a suitable voice
-        if (this.speechSynthesis) {
-            const setVoice = () => {
-                const voices = this.speechSynthesis.getVoices();
-                // Try to find a child-friendly or clear English voice
-                this.speechVoice = voices.find(voice => 
-                    voice.lang.startsWith('en') && 
-                    (voice.name.includes('Female') || voice.name.includes('Child') || voice.name.includes('Google'))
-                ) || voices.find(voice => voice.lang.startsWith('en')) || voices[0];
+        if ('speechSynthesis' in window) {
+            this.speechSynthesis = window.speechSynthesis;
+            
+            // Initialize voices when they become available
+            this.speechSynthesis.onvoiceschanged = () => {
+                this.voices = this.speechSynthesis.getVoices();
+                this.updateVoiceForCurrentLanguage();
             };
             
-            // Voices might not be loaded immediately
-            if (this.speechSynthesis.getVoices().length > 0) {
-                setVoice();
-            } else {
-                this.speechSynthesis.addEventListener('voiceschanged', setVoice);
-            }
+            // In case voices are already available
+            this.voices = this.speechSynthesis.getVoices();
+            this.updateVoiceForCurrentLanguage();
+        } else {
+            console.log('Text-to-speech not supported');
+            this.speechEnabled = false;
         }
+    }
+    
+    updateVoiceForCurrentLanguage() {
+        const langCode = this.currentLanguage === 'fr' ? 'fr-FR' : 'en-US';
+        // Try to find a voice that matches our language
+        this.speechVoice = this.voices.find(voice => voice.lang === langCode && !voice.localService) || 
+                          this.voices.find(voice => voice.lang === langCode) ||
+                          this.voices.find(voice => voice.lang.startsWith(this.currentLanguage)) ||
+                          this.voices[0]; // Fallback to first available voice
+        
+        console.log(`Selected voice: ${this.speechVoice ? this.speechVoice.name : 'default'} for language: ${langCode}`);
+    }
+
+    setLanguage(lang) {
+        this.currentLanguage = lang;
+        
+        // Update UI text
+        document.querySelector('.target-word-label').textContent = this.translations[lang].spellThisWord;
+        document.querySelector('.info-item:nth-child(1)').innerHTML = 
+            `${this.translations[lang].score}: <span id="score">${this.score}</span>`;
+        document.querySelector('.info-item:nth-child(2)').innerHTML = 
+            `${this.translations[lang].level}: <span id="level">${this.level}</span>`;
+        document.querySelector('.info-item:nth-child(3)').innerHTML = 
+            `${this.translations[lang].lives}: <span id="lives">${this.lives}</span>`;
+        
+        // Update game stats
+        const comboStat = document.querySelector('.stat:nth-child(1)');
+        const accuracyStat = document.querySelector('.stat:nth-child(2)');
+        const wordsStat = document.querySelector('.stat:nth-child(3)');
+        
+        comboStat.innerHTML = `${this.translations[lang].combo}: <span id="combo">${this.combo}</span>`;
+        accuracyStat.innerHTML = `${this.translations[lang].accuracy}: <span id="accuracy">${this.accuracy}</span>%`;
+        wordsStat.innerHTML = `${this.translations[lang].words}: <span id="wordsCompleted">${this.wordsCompleted}</span>`;
+        
+        // Reset available word lists with the new language
+        this.availableWordLists = this.wordLists[lang].map(wordList => [...wordList]);
+        
+        // Update the voice for the new language
+        this.updateVoiceForCurrentLanguage();
+        
+        // Select a new word in the current language
+        this.selectNewWord();
+        
+        // Update UI
+        this.updateUI();
     }
     
     speakWord(word) {
@@ -1216,6 +1330,9 @@ class CircusLetterZapper {
         
         // Create speech utterance
         const utterance = new SpeechSynthesisUtterance(word.toLowerCase());
+        
+        // Set the language and voice
+        utterance.lang = this.currentLanguage === 'fr' ? 'fr-FR' : 'en-US';
         
         // Configure speech settings
         if (this.speechVoice) {

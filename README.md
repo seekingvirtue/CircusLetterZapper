@@ -43,7 +43,29 @@ A fun and educational HTML5 circus-themed word spelling game inspired by Atari's
 - **Cognitive Skills**: Improve hand-eye coordination and reaction time
 - **Phonetic Learning**: Audio pronunciation reinforces word learning
 
-## 🎯 How to Play
+## � Language Support
+
+The game supports multiple languages to help players practice vocabulary in different languages:
+
+### Language Selection
+- Choose your preferred language from the dropdown menu at the top of the game
+- Currently supported languages:
+  - English (en-US)
+  - French (fr-FR)
+
+### Text-to-Speech Behavior
+- The game uses your system's text-to-speech voices to pronounce completed words
+- **Important Note**: Voice behavior may vary depending on your system:
+  - For best French pronunciation, ensure your system has French language voices installed
+  - If no matching language voice is found, the game will:
+    1. Try to use a non-local voice in the selected language
+    2. Fall back to any available voice in that language
+    3. Use any voice that matches the language code prefix
+    4. Default to the system's primary voice if no matching voice is found
+- You may need to install additional language packs on your system for optimal pronunciation
+- Chrome and Edge browsers typically provide the best text-to-speech support
+
+## �🎯 How to Play
 
 1. **Aim**: Move your mouse to aim the clown's cannon
 2. **Shoot**: Click to fire colorful balls at falling letters
