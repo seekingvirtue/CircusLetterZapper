@@ -35,51 +35,59 @@
             <button id="startButton">Start Game</button>
             <button id="pauseButton" disabled>Pause</button>
             <button id="resetButton">Reset</button>
-        </div>
-        
-        <div class="language-controls">
-            <h4>🌍 Language</h4>
-            <div class="language-selector">
-                <label for="languageSelect">Select Language:</label>
-                <select id="languageSelect">
-                    <option value="en">English</option>
-                    <option value="fr">Français</option>
-                </select>
-            </div>
+            <button id="optionsButton">⚙️ Options</button>
         </div>
 
-        <div class="audio-controls">
-            <h4>🎵 Audio Settings</h4>
-            <div class="audio-row">
-                <div class="audio-control">
-                    <label for="volumeSlider">🔊 Sound Effects:</label>
-                    <input type="range" id="volumeSlider" min="0" max="100" value="30" step="5">
-                    <span id="volumeDisplay">30%</span>
+        <div id="optionsModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>🎪 Game Options 🎪</h2>
+                
+                <div class="language-controls">
+                    <h4>🌍 Language</h4>
+                    <div class="language-selector">
+                        <label for="languageSelect">Select Language:</label>
+                        <select id="languageSelect">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="audio-control">
-                    <label for="musicSlider">� Background Music:</label>
-                    <input type="range" id="musicSlider" min="0" max="100" value="15" step="5">
-                    <span id="musicDisplay">15%</span>
-                    <button id="musicToggle" class="mini-button">▶️</button>
+
+                <div class="audio-controls">
+                    <h4>🎵 Audio Settings</h4>
+                    <div class="audio-row">
+                        <div class="audio-control">
+                            <label for="volumeSlider">🔊 Sound Effects:</label>
+                            <input type="range" id="volumeSlider" min="0" max="100" value="30" step="5">
+                            <span id="volumeDisplay">30%</span>
+                        </div>
+                        <div class="audio-control">
+                            <label for="musicSlider">🎵 Background Music:</label>
+                            <input type="range" id="musicSlider" min="0" max="100" value="15" step="5">
+                            <span id="musicDisplay">15%</span>
+                            <button id="musicToggle" class="mini-button">▶️</button>
+                        </div>
+                        <div class="audio-control">
+                            <label for="speechSlider">🗣️ Word Speech:</label>
+                            <input type="range" id="speechSlider" min="0" max="100" value="80" step="10">
+                            <span id="speechDisplay">80%</span>
+                            <button id="speechToggle" class="mini-button">🔊</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="audio-control">
-                    <label for="speechSlider">🗣️ Word Speech:</label>
-                    <input type="range" id="speechSlider" min="0" max="100" value="80" step="10">
-                    <span id="speechDisplay">80%</span>
-                    <button id="speechToggle" class="mini-button">🔊</button>
+                
+                <div class="instructions">
+                    <h3>How to Play:</h3>
+                    <p>• Use your mouse to aim the clown's cannon</p>
+                    <p>• Click to shoot balls at the correct letters</p>
+                    <p>• Spell the target word by hitting letters in order</p>
+                    <p>• Avoid hitting wrong letters or you'll lose points!</p>
+                    <p>• Adjust volume, music, and speech using the sliders above</p>
+                    <p>• Toggle circus music and word pronunciation on/off</p>
+                    <p>• Listen as completed words are spoken aloud!</p>
                 </div>
             </div>
-        </div>
-        
-        <div class="instructions">
-            <h3>How to Play:</h3>
-            <p>• Use your mouse to aim the clown's cannon</p>
-            <p>• Click to shoot balls at the correct letters</p>
-            <p>• Spell the target word by hitting letters in order</p>
-            <p>• Avoid hitting wrong letters or you'll lose points!</p>
-            <p>• Adjust volume, music, and speech using the sliders above</p>
-            <p>• Toggle circus music and word pronunciation on/off</p>
-            <p>• Listen as completed words are spoken aloud!</p>
         </div>
         
         <div id="gameOverScreen" class="game-over hidden">
@@ -95,6 +103,8 @@
         </div>
     </div>
     
+    <script src="lib/data.js"></script>
+    <script src="lib/CircusLetterZapper.js"></script>
     <script src="game.js"></script>
 </body>
 </html>

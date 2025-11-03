@@ -1,4 +1,48 @@
-# 🎪 Circus Letter Zapper
+# CircusLetterZapper — Local dev notes
+
+Problem
+-------
+If you open `index.html` directly from the filesystem (file://...), modern browsers block ES module imports because of CORS/security rules. That's why you see the console error about access to `game.js` being blocked from origin null.
+
+Quick fix
+---------
+Serve the project over HTTP (very simple). From the game folder run one of these commands and then open the URL in your browser.
+
+Python 3 (no install required on most systems):
+```bash
+# from the project folder (where index.html lives)
+python3 -m http.server 8000
+# open http://localhost:8000
+```
+
+Or use the included helper script (Unix-like systems):
+```bash
+./start.sh
+# open http://localhost:8000
+```
+
+Node (one-off, using npx):
+```bash
+# serves current folder on http://localhost:5000 by default
+npx serve -s . -l 5000
+```
+
+Install a global static server (optional):
+```bash
+# npm install -g http-server
+# then
+http-server -p 8000
+```
+
+VS Code
+-------
+You can also use the Live Server extension (right-click `index.html` -> "Open with Live Server") which will serve files over http and handle reloads.
+
+Why this is needed
+-------------------
+Native ES modules loaded with `type="module"` use fetch internally and browsers disallow them from the file:// origin for security. Serving over HTTP provides a proper origin (http://localhost) so the module imports work.
+
+If you want, I can add a tiny dev script (`package.json`) and optionally a `Makefile`/task to make starting the server one command.# 🎪 Circus Letter Zapper
 
 A fun and educational HTML5 circus-themed word spelling game inspired by Atari's classic "Word Zapper." Help the clown shoot colorful balls at falling letters to spell words and advance through exciting levels!
 
