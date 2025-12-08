@@ -11,7 +11,12 @@
         <div class="game-header">
             <h1>🎪 Circus Letter Zapper 🎪</h1>
             <div class="game-stats">
-                <div class="stat">Combo: <span id="combo">0</span></div>
+                <div class="stat combo-stat">Combo: <span id="combo">0</span>
+                    <div class="combo-timer-wrap" aria-hidden="true">
+                        <div id="comboTimerBar" class="combo-timer-bar"></div>
+                    </div>
+                    <div id="comboTimer" class="combo-timer-text" aria-live="polite"></div>
+                </div>
                 <div class="stat">Accuracy: <span id="accuracy">100</span>%</div>
                 <div class="stat">Words: <span id="wordsCompleted">0</span></div>
             </div>
@@ -48,8 +53,9 @@
                     <div class="language-selector">
                         <label for="languageSelect">Select Language:</label>
                         <select id="languageSelect">
-                            <option value="en">English</option>
-                            <option value="fr">Français</option>
+                                <option value="en">English</option>
+                                <option value="fr">Français</option>
+                                <option value="atari">Atari (Retro)</option>
                         </select>
                     </div>
                 </div>
